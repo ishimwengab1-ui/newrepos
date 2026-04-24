@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Currency Exchange</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #e5e5e5;
+}
+
+.header {
+  background: #1e1464;
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+
+.header h1 {
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.header p {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.card {
+  width: 80%;
+  margin: -40px auto;
+  background: #dcdcdc;
+  padding: 25px;
+  border-radius: 5px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-row div {
+  flex: 1;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #aaa;
+}
+
+button {
+  background: #1e1464;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2d1ea5;
+}
+
+/* FIXED RESULT POSITION */
+.result {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.result h2 {
+  margin: 0;
+  font-weight: bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <h1>Aaron-COMPANY</h1>
+  <p>CURRENCY EXCHANGE PLATFORM</p>
+</div>
+
+<div class="card">
+  
+  <div class="form-row">
+    <div>
+      <label>Amount</label>
+      <input type="number" id="amount" placeholder="Enter amount">
+    </div>
+
+    <div>
+      <label>From</label>
+      <select id="from">
+        <option value="USD">USA - USD</option>
+        <option value="EUR">EUR - €</option>
+        <option value="RWF">Rwanda - RWF</option>
+      </select>
+    </div>
+
+    <div>
+      <label>To</label>
+      <select id="to">
+        <option value="RWF">Rwanda - RWF</option>
+        <option value="USD">USA - USD</option>
+        <option value="EUR">EUR - €</option>
+      </select>
+    </div>
+  </div>
+
+  <button onclick="convert()">Convert</button>
+
+  <div class="result">
+    <p>Result</p>
+    <h2 id="result">0</h2>
+  </div>
+
+</div>
+
+<script>
+function convert() {
+  let amount = parseFloat(document.getElementById("amount").value);
+  let from = document.getElementById("from").value;
+  let to = document.getElementById("to").value;
+
+  if (isNaN(amount)) {
+    alert("Enter a valid amount");
+    return;
+  }
+
+  const rates = {
+    USD: 1,
+    EUR: 0.92,
+    RWF: 1450
+  };
+
+  let usdAmount = amount / rates[from];
+  let result = usdAmount * rates[to];
+
+  document.getElementById("result").innerText = result.toLocaleString();
+}
+</script>
+
+</body>
+</html>
